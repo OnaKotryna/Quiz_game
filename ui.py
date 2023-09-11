@@ -40,8 +40,8 @@ class QuizInterface():
         else:
             self.canvas.itemconfig(self.question, text=f"Game Over\nScore: {self.game.score}")
             self.canvas.config(bg=THEME_COLOR)
+            self.game.reset()
         
-
     def set_false(self):
         self.set_answer("false")
 
