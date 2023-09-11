@@ -1,4 +1,5 @@
 import requests
+import html
 from question import Question
 import json
 
@@ -13,4 +14,4 @@ data = json.loads(response.text)['results']
 
 
 def load_questions():
-    return [Question(q["question"], q["correct_answer"]) for q in data]
+    return [Question(html.unescape(q["question"]), q["correct_answer"]) for q in data]
