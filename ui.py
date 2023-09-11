@@ -33,8 +33,14 @@ class QuizInterface():
         self.window.mainloop()
 
     def get_next_question(self):
-        question = self.game.get_question()
-        self.canvas.itemconfig(self.question, text=f"Q{self.game.question_num}: {question.question}")
+        self.canvas.config(bg="white")
+        if self.game.has_question():
+            question = self.game.get_question()
+            self.canvas.itemconfig(self.question, text=f"Q{self.game.question_num}: {question.question}")
+        else:
+            self.canvas.itemconfig(self.question, text=f"Game Over\nScore: {self.game.score}")
+            self.canvas.config(bg=THEME_COLOR)
+        
 
     def set_false(self):
         self.set_answer("false")
@@ -44,13 +50,8 @@ class QuizInterface():
 
     def set_answer(self, answer):
         if self.game.check_answer(self.game.question_num, answer):
-            self.canvas.cofig(bg="green")
+            self.canvas.config(bg="#90EE90")
         else:
-            self.canvas.cofig(bg="red")
-
-        if self.game.has_question():
-            self.canvas.cofig(bg="white")
-            self.get_next_question()
-        else:
-            self.canvas.itemconfig(self.question, text=f"Game Over\nScore: {self.game.score}")
+            self.canvas.config(bg="#FF6961")
         self.score.config(text=f"Score: {self.game.score}")
+        self.window.after(1000, self.get_next_question)
