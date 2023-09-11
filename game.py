@@ -13,9 +13,11 @@ class Game:
         question = int(question) - 1
         if self.questions[question].answer.lower() == user_answer.lower():
             self.score += 1
-            self.questions[question].guessed = True
+            checked = True
         else:
-            self.questions[question].guessed = False
+            checked = False
+        self.questions[question].guessed = checked 
+        return checked
 
     def has_question(self):
         return self.question_num < len(self.questions)

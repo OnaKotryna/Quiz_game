@@ -43,8 +43,13 @@ class QuizInterface():
         self.set_answer("true")
 
     def set_answer(self, answer):
-        self.game.check_answer(self.game.question_num, answer)
+        if self.game.check_answer(self.game.question_num, answer):
+            self.canvas.cofig(bg="green")
+        else:
+            self.canvas.cofig(bg="red")
+
         if self.game.has_question():
+            self.canvas.cofig(bg="white")
             self.get_next_question()
         else:
             self.canvas.itemconfig(self.question, text=f"Game Over\nScore: {self.game.score}")
