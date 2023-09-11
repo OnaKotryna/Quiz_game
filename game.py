@@ -21,7 +21,3 @@ class Game:
 
     def has_question(self):
         return self.question_num < len(self.questions)
-
-    def reset(self):
-        self.score = 0
-        self.question_num = 0

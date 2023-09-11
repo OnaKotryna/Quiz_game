@@ -20,13 +20,13 @@ class QuizInterface():
 
         # Button to set answer as false
         img_false = PhotoImage(file="./images/false.png")
-        btn_false = Button(image=img_false, highlightthickness=0, bd=0, command=self.set_false)
-        btn_false.grid(row=2, column=0)
+        self.btn_false = Button(image=img_false, highlightthickness=0, bd=0, command=self.set_false)
+        self.btn_false.grid(row=2, column=0)
 
         # Button to set answer as true
         img_true = PhotoImage(file="./images/true.png")
-        btn_true = Button(image=img_true, highlightthickness=0, bd=0, command=self.set_true)
-        btn_true.grid(row=2, column=1)
+        self.btn_true = Button(image=img_true, highlightthickness=0, bd=0, command=self.set_true)
+        self.btn_true.grid(row=2, column=1)
 
         self.get_next_question()
 
@@ -40,7 +40,8 @@ class QuizInterface():
         else:
             self.canvas.itemconfig(self.question, text=f"Game Over\nScore: {self.game.score}")
             self.canvas.config(bg=THEME_COLOR)
-            self.game.reset()
+            self.btn_true.config(state="disabled")
+            self.btn_false.config(state="disabled")
         
     def set_false(self):
         self.set_answer("false")
